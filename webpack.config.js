@@ -7,10 +7,11 @@ module.exports = {
   mode: "none",
   entry: {
     app: ["@babel/polyfill", "./src/app/index.js"],
+    register:["@babel/polyfill", "./src/app/pages/registrarse.js"]
   },
   output: {
     path: path.resolve(__dirname, "build"),
-    filename: "js/app.bundle.js",
+    filename: "js/[name].bundle.js",
   },
   devServer: {
     port: 5050,
@@ -48,7 +49,7 @@ module.exports = {
             loader: "html-loader",
           },
         ],
-      }
+      },
     ],
   },
   plugins: [
@@ -63,6 +64,20 @@ module.exports = {
         removeStyleLinkTypeAttributes: true,
         useShortDoctype: true,
       },
+      chunks:["app"]
+    }),
+    new HTMLWebpackPlugin({
+      template: "./src/registrarse.html",
+      filename: "registrarse.html",
+      minify: {
+        collapseWhitespace: true,
+        removeComments: true,
+        removeRedundantAttributes: true,
+        removeScriptTypeAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        useShortDoctype: true,
+      },
+      chunks:["register"]
     }),
     new MiniCssExtractPlugin({
       filename: "css/app.bundle.css",
