@@ -1,0 +1,76 @@
+@import './modules/universals.scss';
+@import './modules/variables.scss';
+
+body {
+    $color-primario: #25D366;
+    $color-secundario: #075E54;
+    $color-gris: #D3D3D3;
+
+    body {
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+
+    }
+
+    .container {
+        width: 350px;
+        margin: 0 auto;
+        padding: 20px;
+        border: 1px solid $color-gris;
+        border-radius: 10px;
+        margin-top: 40px;
+    }
+
+    .logo {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .logo img {
+        width: 100px;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 10px;
+        color: $color-primario;
+    }
+
+    form {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 5px;
+        color: $color-secundario;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid $color-gris;
+        border-radius: 5px;
+        margin-bottom: 10px;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        background-color: $color-primario;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    p {
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    a {
+        color: $color-primario;
+    }
+}
