@@ -7,7 +7,8 @@ module.exports = {
   mode: "none",
   entry: {
     app: ["@babel/polyfill", "./src/app/index.js"],
-    register:["@babel/polyfill", "./src/app/pages/registrarse.js"]
+    register:["@babel/polyfill", "./src/app/pages/registrarse.js"],
+    home: ["@babel/polyfill", "./src/app/pages/home.js"]
   },
   output: {
     path: path.resolve(__dirname, "build"),
@@ -78,6 +79,19 @@ module.exports = {
         useShortDoctype: true,
       },
       chunks:["register"]
+    }),
+    new HTMLWebpackPlugin({
+      template: "./src/home.html",
+      filename: "home.html",
+      minify: {
+        collapseWhitespace: true,
+        removeComments: true,
+        removeRedundantAttributes: true,
+        removeScriptTypeAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        useShortDoctype: true,
+      },
+      chunks:["home"]
     }),
     new MiniCssExtractPlugin({
       filename: "css/app.bundle.css",
