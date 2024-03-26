@@ -1,12 +1,13 @@
+
 import { getUsers } from './user/service/getUsers.js';
 import { getMessages } from './message/service/getMessages.js';
 import { updateMessage } from './message/service/updateMessage.js';
 import { DateTime } from 'https://moment.github.io/luxon/es6/luxon.js';
-import { LOADING_IMAGE_PROFILE, LIST_MY_CHAT, LOADDING_CHAT, LOADING_MESSAGES, LAST_MESSAGE, LAST_CHAT, IMAGEN_PANEL_CHANGE_IMAGEN, URL_DEFECTO, NAME_USER, LIST_MY_MESSAGE, iniciada } from './user/function/loading.js';
+import {LOADING_IMAGE_PROFILE,LIST_MY_CHAT,LOADDING_CHAT,LOADING_MESSAGES,LAST_MESSAGE,LAST_CHAT,IMAGEN_PANEL_CHANGE_IMAGEN, URL_DEFECTO, NAME_USER,LIST_MY_MESSAGE,iniciada} from './user/function/loading.js';
 import { updatePhotoUser } from './user/service/updatePhoto.js';
 import { updateNameUser } from './user/service/updateNameUser.js';
 
-/*Capturar los parametros que recibimos en la URL*/
+/*Capturar los parametros que recibimos en la URL*/ 
 const params = new URLSearchParams(window.location.search);
 /* Constante con la id del usuaario que inicio sesion */
 const ID = params.get('id');
@@ -33,16 +34,19 @@ const FORM_CHANGE_IMAGEN = document.querySelector('.container__whatsapp__changeI
 const mediaQuery = window.matchMedia('(max-width: 1115px)');
 
 
-function queryMovil(event) {
-    if (event.matches) {
-        TEMPLATE_MY_CONTACTS.style.display = 'block';
-        TEMPLETE_MY_CHAT.style.display = 'none';
+function queryMovil(event)
+{
+    if(event.matches)
+    {
+        TEMPLATE_MY_CONTACTS.style.display='block';
+        TEMPLETE_MY_CHAT.style.display='none';
     }
-    else {
-        TEMPLATE_MY_CONTACTS.style.display = 'block';
-        TEMPLETE_MY_CHAT.style.display = 'block';
+    else
+    {
+        TEMPLATE_MY_CONTACTS.style.display='block';
+        TEMPLETE_MY_CHAT.style.display='block';
     }
-
+   
 }
 
 mediaQuery.addListener(queryMovil);
@@ -63,12 +67,12 @@ SEND_MESSAGE.addEventListener('input', () => {
 
 /*Enviar Mensaje del usuario con sesion iniciada al del ultimo chat seleccionado*/
 SEND_MESSAGE.addEventListener('keypress', async (e) => {
-    /*Se enviara el mensaje cuando se presione la tecla enter, falta hacer validacion de el boton que se encuentra al lado izquierdo*/
+    /*Se enviara el mensaje cuando se presione la tecla enter, falta hacer validacion de el boton que se encuentra al lado izquierdo*/ 
     if (e.key === 'Enter') {
         console.log('ID: ', ID, 'ID2: ', ID2);
         /*Obtenemos la informacino del usuario que inicio sesion y el usuario que se selecciono para chatear*/
         let message = listMessages.find(message => message.idUser1 == ID && message.idUser2 == ID2 || message.idUser1 == ID2 && message.idUser2 == ID);
-        console.log('message: ', message);
+       console.log('message: ', message);
         message.conversaciones.push(
             {
                 "sendBy": ID,
@@ -78,7 +82,7 @@ SEND_MESSAGE.addEventListener('keypress', async (e) => {
                 "flag": false
             }
         );
-        let data = updateMessage(message.id, message.conversaciones);
+        let data = updateMessage(message.id,message.conversaciones);
         SEND_MESSAGE.value = "";
         listMessages = await getMessages();
         window.location.reload()
@@ -103,7 +107,7 @@ NAME_USER();
 queryMovil(mediaQuery);
 
 /*Pintar la card del ultimo mensaje enviado*/
-const LAST_CHAT_CONTAINER = document.getElementById(ID2);
+const LAST_CHAT_CONTAINER =document.getElementById(ID2);
 LAST_CHAT_CONTAINER.style.backgroundColor = '#e9e9e9';
 
 /*Los siguientes container los cargamos aqui y no en el principio de la script para no generar errores*/
@@ -120,11 +124,11 @@ CONTAINER_CARD.addEventListener('click', () => {
             ID2 = parseInt(card.id);
             LOADDING_CHAT(card.id);
             LOADING_MESSAGES(card.id);
-            iniciada(ID, ID2);
-
+            iniciada(ID,ID2);
+            
             //LIST_MY_MESSAGE(card.id);
         });
-        if (card.id != ID2) {
+        if(card.id != ID2){
             card.style.backgroundColor = '#ffffff';
         }
     });
@@ -140,7 +144,7 @@ SEND_MESSAGE_MY_CHAT.addEventListener('click', () => {
 
 CLOSE_TEMPLETE_INFO_MESSAGE.addEventListener('click', () => {
     TEMPLETE_INFO_MESSAGE.style.display = 'none';
-    CONTAINER_SEARCG_MESSAGE.innerHTML = '';
+    CONTAINER_SEARCG_MESSAGE.innerHTML='';
 });
 
 
@@ -151,18 +155,18 @@ CHANGE_PERSONAL_INFORMATION.addEventListener('click', () => {
 });
 
 /*Mostar form para cambiar la URL de la imagen */
-CHANGE_IMAGEN.addEventListener('click', () => {
-    FORM_CHANGE_IMAGEN.style.display = 'block';
+CHANGE_IMAGEN.addEventListener('click',()=>{
+    FORM_CHANGE_IMAGEN.style.display='block';
 });
 /*Ocultar form para cambiar la URL de la imagen */
-CHANGE_IMAGEN.addEventListener('dblclick', () => {
-    FORM_CHANGE_IMAGEN.style.display = 'none';
+CHANGE_IMAGEN.addEventListener('dblclick',()=>{
+    FORM_CHANGE_IMAGEN.style.display='none';
 });
 /*update user photo*/
-const CAMBIAR_URL = document.querySelector('.container__whatsapp__changeImagen__body__ChangeImagen__formulario__nameImg-img')
+const CAMBIAR_URL =document.querySelector('.container__whatsapp__changeImagen__body__ChangeImagen__formulario__nameImg-img')
 
-CAMBIAR_URL.addEventListener('click', async () => {
-    let urlActualizar = document.querySelector('.container__whatsapp__changeImagen__body__ChangeImagen__formulario__nameImg-name').value;
+CAMBIAR_URL.addEventListener('click',async()=>{
+    let urlActualizar = document.querySelector('.container__whatsapp__changeImagen__body__ChangeImagen__formulario__nameImg-name').value;    
     let user = listUsers.find(user => user.id == ID);
     await updatePhotoUser(user, urlActualizar);
     window.location.reload()
@@ -177,53 +181,53 @@ const INPUT_EDIT = document.querySelector('.container__whatsapp__changeImagen__b
 const NAME_CHANGE = document.querySelector('.container__whatsapp__changeImagen__body__data__formulario__nameImg-img');
 
 EDIT_NAME.addEventListener('click', () => {
-    INPUT_EDIT.disabled = false;
+    INPUT_EDIT.disabled=false;
     INPUT_EDIT.style.border = "2px solid black";
 });
 
-NAME_CHANGE.addEventListener('dblclick', async () => {
-    let n = document.querySelector('.container__whatsapp__changeImagen__body__data__formulario__nameImg-name').value
-    let user = listUsers.find(user => user.id == ID);
-    await updateNameUser(user, n);
-    window.location.reload()
+NAME_CHANGE.addEventListener('dblclick', async()=>{
+        let n = document.querySelector('.container__whatsapp__changeImagen__body__data__formulario__nameImg-name').value
+        let user = listUsers.find(user => user.id == ID);
+        await updateNameUser(user,n);
+        window.location.reload()
 });
 
 /*Buscar chat */
 const SEARCH_CHAT = "algún valor";
-const inputElement = document.getElementById('searchbar');
+const inputElement = document.getElementById('searchbar'); 
 
-inputElement.onkeyup = function SEARCH_CHAT() {
+inputElement.onkeyup = function SEARCH_CHAT () {
     let input = document.getElementById('searchbar').value
-    input = input.toLowerCase();
+    input=input.toLowerCase();
     let x = document.querySelectorAll('.container__whatsapp__myContacts__card__cardContact__text__nameDate-name');
     let card = document.querySelectorAll('.container__whatsapp__myContacts__card__cardContact');
     for (let i = 0; i < x.length; i++) {
         if (!x[i].innerHTML.toLowerCase().includes(input)) {
-            card[i].style.display = "none";
+            card[i].style.display="none";
         }
-        else {
-            card[i].style.display = "flex";
+        else {   
+            card[i].style.display="flex";              
         }
     }
 }
 
 /*Buscar mensaje */
 const SEARCH_MESSAGE = "algún valor";
-const inputMessage = document.querySelector('.container__whatsapp__infoMesagge__search__formulario-input');
+const inputMessage = document.querySelector('.container__whatsapp__infoMesagge__search__formulario-input'); 
 
-inputMessage.onkeyup = function SEARCH_MESSAGE() {
+inputMessage.onkeyup = function SEARCH_MESSAGE () {
     let input = inputMessage.value;
     console.log('aaa', input);
-    input = input.toLowerCase();
+    input=input.toLowerCase();
     let x = document.querySelectorAll('.container__whatsapp__infoMesagge__cardInfo-card__infoMessage-message');
     let card = document.querySelectorAll('.container__whatsapp__infoMesagge__cardInfo-card');
-    console.log('x: ', x.length, 'card: ', card.length);
+    console.log('x: ', x.length , 'card: ', card.length);
     for (let i = 0; i < card.length; i++) {
         if (x[i].innerHTML.toLowerCase().includes(input)) {
-            card[i].style.display = "block";
+            card[i].style.display="block";
         }
-        else {
-            card[i].style.display = "none";
+        else {   
+            card[i].style.display="none";              
         }
     }
 }
