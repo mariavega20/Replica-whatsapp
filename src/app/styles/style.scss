@@ -10,8 +10,12 @@ body {
         font-family: sans-serif;
         margin: 0;
         padding: 0;
-
+        
+    
+        
+        
     }
+
 
     .container {
         width: 350px;
@@ -72,5 +76,69 @@ body {
 
     a {
         color: $color-primario;
+    }
+}
+
+@media (max-width: 768px) {
+
+    /* Ajustes específicos para móviles */
+    .container {
+        width: 90%;
+        padding: 10px;
+    }
+
+    .logo img {
+        max-width: 100px;
+    }
+
+    h1 {
+        font-size: 18px;
+    }
+
+    input,
+    button {
+        font-size: 16px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+
+    /* Ajustes específicos para tablets */
+    .container {
+        width: 70%;
+    }
+
+    .logo img {
+        max-width: 150px;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    input,
+    button {
+        font-size: 18px;
+    }
+}
+
+@media (min-width: 1024px) {
+
+    /* Ajustes específicos para escritorios */
+    .container {
+        width: 500px;
+    }
+
+    .logo img {
+        max-width: 200px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    input,
+    button {
+        font-size: 20px;
     }
 }
